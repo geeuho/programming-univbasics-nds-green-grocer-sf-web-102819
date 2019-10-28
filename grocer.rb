@@ -12,8 +12,17 @@ def find_item_by_name_in_collection(name, collection)
    item
 end
 
-def consolidate_cart(cart)
-  
+
+def consolidate_cart(cart) 
+  new_cart = {} 
+  cart.each do |items_array| 
+    items_array.each do |item, attribute_hash| 
+      new_cart[item] ||= attribute_hash 
+      new_cart[item][:count] ? new_cart[item][:count] += 1 :   
+      new_cart[item][:count] = 1 
+  end 
+  new_cart 
+  end
 end
 
 def apply_coupons(cart, coupons)
