@@ -62,14 +62,13 @@ def apply_clearance(cart)
 cart 
 end
 
-def checkout(cart, coupons)
-  # Consult README for inputs and outputs
-  #
-  # This method should call
-  # * consolidate_cart
-  # * apply_coupons
-  # * apply_clearance
-  #
-  # BEFORE it begins the work of calculating the total (or else you might have
-  # some irritated customers
+def checkout(cart, coupons) 
+  total = 0 
+  new_cart = consolidate_cart(cart) 
+  coupon_cart = apply_coupons(new_cart, coupons) 
+  clearance_cart = apply_clearance(coupon_cart) 
+  clearance_cart.each do |item, attribute_hash| 
+    total += (attribute_hash[:price] * attribute_hash[:count])
+  end 
+  total = (total * 0.9) if total > 100 total 
 end
